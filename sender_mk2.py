@@ -6,6 +6,8 @@ from inputs import get_gamepad
 
 SEND_INTERVAL = 0 # 0.02  # 50 Hz
 last_send = time.time()
+MANUAL_MAX_STRAFE = True
+STRAFE_MAX = 24000 # max is 32768
 
 # Target PC IP and UDP port
 TARGET_IP = "192.168.1.67"  # replace with your receiver PC
@@ -55,6 +57,15 @@ def normalize_trigger(value):
         return int(value / 65535 * 255)
     return value
 
+def max_left_stick(value):
+    sign = 1
+    if value < 0:
+        sign = -1
+    if abs(value) > STRAFE_MAX:
+        return STRAFE_MAX * sign
+    else:
+        return value
+
 print("Sending ReWASD controller state over UDP...")
 
 while True:
@@ -96,6 +107,10 @@ while True:
             ly = max(-32768, min(32767, int(ly)))
             rx = max(-32768, min(32767, int(rx)))
             ry = max(-32768, min(32767, int(ry)))
+
+            # Fix strafe on left stick
+            if MANUAL_MAX_STRAFE:
+                lx = max_left_stick(lx)
 
             # Pack and send
             # print(lx, ly, rx, ry)
