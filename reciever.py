@@ -84,37 +84,38 @@ while True:
     gamepad.press_special_button(dsSPEC.DS4_SPECIAL_BUTTON_TOUCHPAD) if buttons & 32 else gamepad.release_button(dsSPEC.DS4_SPECIAL_BUTTON_TOUCHPAD)
 
     noneButtonSelected = True
+    cornerDPADEnabled = False
 
     # NORTHWEST
-    if buttons & 5:
+    if buttons & 5 and cornerDPADEnabled:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_NORTHWEST)
         noneButtonSelected = False
     # WEST
-    if buttons & 4:
+    if buttons & 4 and noneButtonSelected:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_WEST)
         noneButtonSelected = False
     # SOUTHWEST
-    if buttons & 6:
+    if buttons & 6 and noneButtonSelected and cornerDPADEnabled:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_SOUTHWEST)
         noneButtonSelected = False
     # SOUTH
-    if buttons & 2:
+    if buttons & 2 and noneButtonSelected:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_SOUTH)
         noneButtonSelected = False
     # SOUTHEAST
-    if buttons & 10:
+    if buttons & 10 and noneButtonSelected and cornerDPADEnabled:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_SOUTHEAST)
         noneButtonSelected = False
     # EAST
-    if buttons & 8:
+    if buttons & 8 and noneButtonSelected:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_EAST)
         noneButtonSelected = False
     # NORTHEAST
-    if buttons & 9:
+    if buttons & 9 and noneButtonSelected and cornerDPADEnabled:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_NORTHEAST)
         noneButtonSelected = False
     # NORTH
-    if buttons & 1:
+    if buttons & 1 and noneButtonSelected:
         gamepad.directional_pad(direction=dir.DS4_BUTTON_DPAD_NORTH)
         noneButtonSelected = False
     # None
