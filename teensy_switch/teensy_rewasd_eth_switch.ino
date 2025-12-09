@@ -45,6 +45,8 @@ void setup() {
   Serial.begin(115200); // May not need this?
   Ethernet.begin();
   Udp.begin(PORT);
+  // Don't forget to start the gamepad
+  // Then delay it (to give time to connect)
 }
 
 void loop() {
